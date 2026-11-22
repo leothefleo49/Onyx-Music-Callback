@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onyx Music — Last.fm sign-in</title>
+  <style>
+    body { background:#0c0c0e; color:#fff; font-family:system-ui,sans-serif; display:flex; min-height:100vh; align-items:center; justify-content:center; margin:0; padding:24px; text-align:center; }
+    a { color:#ff8a80; }
+    .card { max-width:420px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Returning to Onyx Music…</h2>
+    <p>If the app does not open automatically, tap the link below.</p>
+    <p><a id="fallback" href="onyxmusic://auth-callback">Open Onyx Music</a></p>
+  </div>
+  <script>
+    (function () {
+      var token = new URLSearchParams(window.location.search).get('token') || '';
+      var target = 'onyxmusic://auth-callback' + (token ? '?token=' + encodeURIComponent(token) : '');
+      document.getElementById('fallback').href = target;
+      window.location.replace(target);
+    })();
+  </script>
+</body>
+</html>
